@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<style>
+    button {
+        background: steelblue;
+        border-radius: 4px;
+        height: 40px;
+        width: 100px;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+    }
+
+    button:focus {
+        outline: 0;
+    }
+
+    #minutes,
+    #seconds {
+        font-size: 40px;
+    }
+
+    .bigger {
+        font-size: 40px;
+    }
+
+    .button {
+        box-shadow: 0 9px #999;
+    }
+
+    .button:hover {
+        background-color: hotpink
+    }
+
+    .button:active {
+        background-color: hotpink;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+</style>
+
+<body align='center'>
+    <button onclick='set_timer()' class='button'>▶️</button>
+    <button onclick='stop_timer()' class='button'>⏹️</button><br><br>
+    <label id="minutes">00</label><span class='bigger'>:</span><label id="seconds">00</label>
+</body>
+
+</html>
+<script>
+
+    function pad(val) {
+        valString = val + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        } else {
+            return valString;
+        }
+    }
+
+    totalSeconds = 0;
+    function setTime(minutesLabel, secondsLabel) {
+        totalSeconds++;
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+    }
+
+    function set_timer() {
+        minutesLabel = document.getElementById("minutes");
+        secondsLabel = document.getElementById("seconds");
+        my_int = setInterval(function () { setTime(minutesLabel, secondsLabel) }, 1000);
+    }
+
+    function stop_timer() {
+        clearInterval(my_int);
+    }
+
+
+</script>
